@@ -1,0 +1,18 @@
+spring:
+
+  application:
+    name: Expenses-Tracker
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydatabase
+    username: myuser
+    password: mypassword
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
