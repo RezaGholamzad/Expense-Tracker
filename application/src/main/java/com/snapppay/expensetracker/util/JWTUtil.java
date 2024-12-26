@@ -35,10 +35,10 @@ public class JWTUtil {
 
     }
 
-    public static String createJwt(Integer id) throws JoseException {
+    public static String createJwt(String username) throws JoseException {
         // Create the Claims
         JwtClaims claims = new JwtClaims();
-        claims.setSubject(String.valueOf(id));
+        claims.setSubject(String.valueOf(username));
         claims.setExpirationTimeMinutesInTheFuture(10); // Token valid for 10 minutes
 
         // Create the JWT header
