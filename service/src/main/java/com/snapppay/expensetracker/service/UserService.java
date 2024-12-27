@@ -18,10 +18,14 @@ public class UserService {
     private final UserRepository userRepository;
 
     public final UserDto getUserByUsername(String username) {
+        return convert(getUserEntityByUsername(username));
+    }
+
+    public final User getUserEntityByUsername(String username) {
         Optional<User> user = userRepository.findByUsername(username);
 
         if (user.isPresent()) {
-            return convert(user.get());
+            return user.get();
         }
 
         log.info("User with username {} not found", username);
