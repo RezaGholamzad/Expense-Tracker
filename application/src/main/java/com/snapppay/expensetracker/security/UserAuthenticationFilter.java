@@ -29,15 +29,15 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
                     var credentials = accessToken.substring("Bearer ".length());
                     var authenticationToken = authenticationManager.authenticate(new JWTAuthenticationToken(credentials));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                    filterChain.doFilter(request, response);
                 }
+            } else {
+                SecurityContextHolder.clearContext();
             }
-            SecurityContextHolder.clearContext();
-            filterChain.doFilter(request, response);
         } catch (Exception e) {
             log.error("Error occurred while authorizing request");
             throw new UnAuthorizedException("Error occurred while authorizing request", e);
         }
+        filterChain.doFilter(request, response);
     }
 
     private boolean isLoginRequest(HttpServletRequest request) {
