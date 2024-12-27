@@ -1,6 +1,5 @@
 package com.snapppay.expensetracker.controller;
 
-import com.snapppay.expensetracker.exception.ExpenseTrackerRuntimeException;
 import com.snapppay.expensetracker.exception.InvalidPasswordOrUsernameException;
 import com.snapppay.expensetracker.model.LoginRequest;
 import com.snapppay.expensetracker.model.LoginResponse;
@@ -13,7 +12,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.jose4j.lang.JoseException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,12 +38,8 @@ public class UserController {
             description = "Receive Access token for subsequence requests and user information")
     public LoginResponse login(@ModelAttribute LoginRequest request) {
         var user = authenticationService.login(request);
-        String accessToken;
-        try {
-            accessToken = JWTUtil.createJwt(user.getUsername());
-        } catch (JoseException e) {
-            throw new ExpenseTrackerRuntimeException("Token creation was failed" ,e);
-        }
-        return new LoginResponse(accessToken, user.userDto().username(), user.userDto().firstName(), user.userDto().lastName());
+        var accessToken = JWTUtil.createJwt(user.getUsername());
+        var userDto = user.userDto();
+        return new LoginResponse(accessToken, userDto.username(), userDto.firstName(), userDto.lastName());
     }
 }

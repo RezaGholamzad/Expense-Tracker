@@ -1,5 +1,6 @@
 package com.snapppay.expensetracker.util;
 
+import com.snapppay.expensetracker.exception.ExpenseTrackerRuntimeException;
 import org.jose4j.jws.JsonWebSignature;
 import org.jose4j.jwt.JwtClaims;
 import org.jose4j.jwt.MalformedClaimException;
@@ -30,12 +31,12 @@ public class JWTUtil {
 
             return claims.getSubject();
         } catch (InvalidJwtException | MalformedClaimException e) {
-            throw new RuntimeException(e);
+            throw new ExpenseTrackerRuntimeException("Error occurred while decode the token" ,e);
         }
 
     }
 
-    public static String createJwt(String username) throws JoseException {
+    public static String createJwt(String username) {
         // Create the Claims
         JwtClaims claims = new JwtClaims();
         claims.setSubject(String.valueOf(username));
@@ -50,7 +51,11 @@ public class JWTUtil {
         jws.setKey(key);
 
         // Sign the JWT and return it
-        return jws.getCompactSerialization();
+        try {
+            return jws.getCompactSerialization();
+        } catch (JoseException e) {
+            throw new ExpenseTrackerRuntimeException("Error occurred while create the token" ,e);
+        }
     }
 
 }

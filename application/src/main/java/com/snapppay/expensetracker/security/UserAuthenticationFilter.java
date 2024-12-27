@@ -1,6 +1,6 @@
 package com.snapppay.expensetracker.security;
 
-import com.snapppay.expensetracker.exception.ExpenseTrackerRuntimeException;
+import com.snapppay.expensetracker.exception.UnAuthorizedException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,9 +34,9 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
             }
             SecurityContextHolder.clearContext();
             filterChain.doFilter(request, response);
-        } catch (RuntimeException e) {
-            log.error("Error occurred while authorizing request in", e);
-            throw new ExpenseTrackerRuntimeException("Error occurred while authorizing request");
+        } catch (Exception e) {
+            log.error("Error occurred while authorizing request");
+            throw new UnAuthorizedException("Error occurred while authorizing request", e);
         }
     }
 
