@@ -1,6 +1,6 @@
 package com.snapppay.expensetracker.controller;
 
-import com.snapppay.expensetracker.exception.InvalidPasswordOrUsernameException;
+import com.snapppay.expensetracker.exception.FailureResponse;
 import com.snapppay.expensetracker.model.LoginRequest;
 import com.snapppay.expensetracker.model.LoginResponse;
 import com.snapppay.expensetracker.security.AuthenticationService;
@@ -30,8 +30,10 @@ public class UserController {
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Successful - login user data"),
-                    @ApiResponse(responseCode = "403", description = "Invalid user or password",
-                            content = @Content(schema = @Schema(implementation = InvalidPasswordOrUsernameException.class)))
+                    @ApiResponse(responseCode = "400", description = "Bad request",
+                            content = @Content(schema = @Schema(implementation = FailureResponse.class))),
+                    @ApiResponse(responseCode = "401", description = "Invalid user or password",
+                            content = @Content(schema = @Schema(implementation = FailureResponse.class)))
             }
     )
     @Operation(summary = "Authentication operation",

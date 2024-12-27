@@ -1,7 +1,7 @@
 package com.snapppay.expensetracker.controller;
 
 import com.snapppay.expensetracker.context.ExpenseTrackerContextUtil;
-import com.snapppay.expensetracker.exception.UnAuthorizedException;
+import com.snapppay.expensetracker.exception.FailureResponse;
 import com.snapppay.expensetracker.model.BillDto;
 import com.snapppay.expensetracker.model.BillRequest;
 import com.snapppay.expensetracker.model.BillResponse;
@@ -30,8 +30,10 @@ public class BillController {
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Successful"),
-                    @ApiResponse(responseCode = "403", description = "Invalid authorization token",
-                            content = @Content(schema = @Schema(implementation = UnAuthorizedException.class)))
+                    @ApiResponse(responseCode = "400", description = "Bad request",
+                            content = @Content(schema = @Schema(implementation = FailureResponse.class))),
+                    @ApiResponse(responseCode = "401", description = "Invalid authorization token",
+                            content = @Content(schema = @Schema(implementation = FailureResponse.class)))
             }
     )
     @Operation(summary = "Add categorized bill operation", description = "Add categorized bill operation and get bill id")
