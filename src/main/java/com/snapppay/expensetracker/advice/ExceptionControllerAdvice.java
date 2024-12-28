@@ -1,5 +1,6 @@
-package com.snapppay.expensetracker.exception;
+package com.snapppay.expensetracker.advice;
 
+import com.snapppay.expensetracker.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;

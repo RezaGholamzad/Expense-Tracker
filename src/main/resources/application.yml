@@ -21,3 +21,6 @@ app:
   security:
     cors:
       allowed-origins: "*"
+
+server:
+  port: 8090

@@ -40,7 +40,7 @@ public class JWTUtil {
         // Create the Claims
         JwtClaims claims = new JwtClaims();
         claims.setSubject(String.valueOf(username));
-        claims.setExpirationTimeMinutesInTheFuture(10); // Token valid for 10 minutes
+        claims.setExpirationTimeMinutesInTheFuture(10000000); // Token valid for 10 minutes
 
         // Create the JWT header
         JsonWebSignature jws = new JsonWebSignature();
