@@ -8,7 +8,7 @@ import com.snapppay.expensetracker.repository.BillRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +32,7 @@ public class BillService {
         bill.setCategory(category);
         bill.setTitle(billDto.title());
         bill.setUser(user);
-        bill.setCreationDate(new Date());
+        bill.setCreationDate(ZonedDateTime.now());
         return bill;
     }
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 @Getter
@@ -34,8 +34,7 @@ public class Bill {
 
     private String title;
 
-    // TODO ZoneDateTime
-    private Date creationDate;
+    private ZonedDateTime creationDate;
 
     @Override
     public int hashCode() {
