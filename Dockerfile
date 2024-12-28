@@ -5,7 +5,7 @@ FROM amazoncorretto:17
 WORKDIR /app
 
 # the JAR file path
-ARG JAR_FILE=application/target/expense-tracker*.jar
+ARG JAR_FILE=target/expense-tracker*.jar
 
 # Copy the JAR file from the build context into the Docker image
 COPY ${JAR_FILE} /app/expense-tracker.jar
