@@ -7,7 +7,7 @@ import com.snapppay.expensetracker.model.CategoryBudgetDto;
 import com.snapppay.expensetracker.model.CategoryBudgetRequest;
 import com.snapppay.expensetracker.model.CategoryBudgetResponse;
 import com.snapppay.expensetracker.model.CategoryTypeDto;
-import com.snapppay.expensetracker.service.CategoryBudgetService;
+import com.snapppay.expensetracker.service.CategoryBudgetUpdateService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,7 +28,7 @@ import java.math.BigDecimal;
 @Tag(name = "Category budget controller")
 public class CategoryBudgetController {
 
-    private final CategoryBudgetService categoryBudgetService;
+    private final CategoryBudgetUpdateService categoryBudgetUpdateService;
 
     @ApiResponses(
             value = {
@@ -42,7 +42,7 @@ public class CategoryBudgetController {
     @Operation(summary = "Add category budget operation", description = "Add category budget to alert the user ")
     @PostMapping("/category-budget")
     public CategoryBudgetResponse addCategoryBudget(@RequestBody CategoryBudgetRequest request) {
-        return new CategoryBudgetResponse(categoryBudgetService.setCategoryBudget(convert(request)).budgetId());
+        return new CategoryBudgetResponse(categoryBudgetUpdateService.setCategoryBudget(convert(request)).budgetId());
     }
 
     private CategoryBudgetDto convert(CategoryBudgetRequest categoryBudgetRequest) {
