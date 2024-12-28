@@ -1,6 +1,5 @@
 package com.snapppay.expensetracker.entity;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,17 +18,15 @@ public class CategoryBudget {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Nonnull
     @ManyToOne
-    @JoinColumn (name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @Nonnull
     @ManyToOne
-    @JoinColumn (name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Nonnull
+    @Column(nullable = false)
     private BigDecimal budget;
 
     public CategoryBudget(Category category, User user, BigDecimal budget) {
