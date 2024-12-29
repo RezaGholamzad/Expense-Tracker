@@ -35,3 +35,5 @@ management:
       exposure:
         include: '*'
       # include: health,info # Or just enable specific ones
+  server:
+    port: 8081
