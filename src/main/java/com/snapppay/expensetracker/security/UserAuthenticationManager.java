@@ -12,7 +12,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
-import java.util.Base64;
 import java.util.List;
 
 @Slf4j
@@ -21,6 +20,7 @@ import java.util.List;
 public class UserAuthenticationManager implements AuthenticationManager {
 
     private final UserDetailsService userDetailsService;
+    private final ExpenseTrackerPasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -35,8 +35,7 @@ public class UserAuthenticationManager implements AuthenticationManager {
             return new UsernamePasswordAuthenticationToken(username, token, List.of());
         } else if (authentication instanceof UsernamePasswordAuthenticationToken) {
             var userDetails = userDetailsService.loadUserByUsername(authentication.getPrincipal().toString());
-            // todo use strong password encoder
-            if (Base64.getEncoder().encodeToString(authentication.getCredentials().toString().getBytes()).equals(userDetails.getPassword())) {
+            if (passwordEncoder.matches(authentication.getCredentials().toString(), userDetails.getPassword())) {
                 return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             }
         }
