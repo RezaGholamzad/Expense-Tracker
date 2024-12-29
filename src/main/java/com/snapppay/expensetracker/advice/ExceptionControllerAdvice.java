@@ -15,13 +15,13 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<FailureResponse> badRequest(BadRequestException ex) {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new FailureResponse(ex.getClass().getName(), ex.getMessage()));
+                .body(new FailureResponse(ex.getClass().getSimpleName(), ex.getMessage()));
     }
 
     @ExceptionHandler(exception = {InvalidPasswordOrUsernameException.class, UnAuthorizedException.class, AuthenticationException.class})
     public ResponseEntity<FailureResponse> invalidUserOrPassword(Exception ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(new FailureResponse(ex.getClass().getName(), ex.getMessage()));
+                .body(new FailureResponse(ex.getClass().getSimpleName(), ex.getMessage()));
     }
 
     @ExceptionHandler(Throwable.class)
