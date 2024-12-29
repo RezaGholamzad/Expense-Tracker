@@ -66,7 +66,7 @@ set up:
 
 ## 💡 Usage
 
-1. Open your browser and go to http://localhost:8080
+1. Open your browser and go to http://localhost:8080/swagger-ui/index.html
 
 2. log in
 
