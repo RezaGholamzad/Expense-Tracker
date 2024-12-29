@@ -1,4 +1,4 @@
-package unitTest;
+package com.snapppay.expensetracker.unitTest;
 
 import com.snapppay.expensetracker.model.CategoryType;
 import com.snapppay.expensetracker.service.BudgetAlertService;
