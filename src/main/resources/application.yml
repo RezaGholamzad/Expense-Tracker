@@ -24,3 +24,14 @@ app:
 
 server:
   port: 8080
+
+management:
+  logging:
+    export:
+      enabled: on
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: '*'
+      # include: health,info # Or just enable specific ones
